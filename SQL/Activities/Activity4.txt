@@ -1,0 +1,6 @@
+-- Activity 4
+Alter table salesman add grade int;
+
+Update salesman Set grade = 100;
+
+Select * from salesman;
