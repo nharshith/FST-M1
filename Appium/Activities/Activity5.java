@@ -1,7 +1,5 @@
 package activities;
 
-import static org.testng.Assert.assertEquals;
-
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,6 +8,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,7 +18,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 
-public class Activity4 {
+public class Activity5 {
 
 	// Declare driver
 	AppiumDriver driver;
@@ -32,8 +31,8 @@ public class Activity4 {
 		UiAutomator2Options options = new UiAutomator2Options();
 		options.setPlatformName("android");
 		options.setAutomationName("UiAutomator2");
-		options.setAppPackage("com.android.contacts");
-		options.setAppActivity(".activities.PeopleActivity");
+		options.setAppPackage("com.google.android.apps.messaging");
+		options.setAppActivity(".ui.ConversationListActivity");
 		options.noReset();
 
 		// Server URL
@@ -46,15 +45,19 @@ public class Activity4 {
 
 	// Test function
 	@Test
-	public void addContactTest() {
-		driver.findElement(AppiumBy.accessibilityId("Create new contact")).click();
-		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text='First name']")).sendKeys("Appium");
-		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text='Last name']")).sendKeys("Test");
-		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text='Phone']")).sendKeys("1234567890");
-		driver.findElement(AppiumBy.id("editor_menu_save_button")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("large_title")));
-
-		assertEquals(driver.findElement(AppiumBy.id("large_title")).getText(), "Appium Test");
+	public void sendMessageTest() {
+		driver.findElement(AppiumBy.accessibilityId("Start chat")).click();
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='ContactSearchField']"))));
+		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id='ContactSearchField']"))
+				.sendKeys("7892954743");
+		driver.findElement(
+				AppiumBy.xpath("//android.view.View[@resource-id='ContactSuggestionList']/android.view.View[2]"))
+				.click();
+		driver.findElement(AppiumBy.id("compose_message_text")).sendKeys("Hello from Appium");
+		driver.findElement(AppiumBy.accessibilityId("Send SMS")).click();
+		wait.until(ExpectedConditions.visibilityOf(driver.findElement(AppiumBy.className("android.widget.TextView"))));
+		String message = driver.findElement(AppiumBy.className("android.widget.TextView")).getText();
+		Assert.assertEquals(message, "Hello from Appium");
 	}
 
 	// Tear down function

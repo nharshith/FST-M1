@@ -41,7 +41,7 @@ public class Activity2 {
 
 	// Test function
 	@Test
-	public void addTest() throws InterruptedException {
+	public void test() throws InterruptedException {
 		driver.get("https://training-support.net");
 		String heading = driver.findElement(AppiumBy.xpath("//android.view.View[@text='Training Support']")).getText();
 		System.out.println("Heading: " + heading);
