@@ -42,7 +42,7 @@ public class Activity1 {
 
 	// Test function
 	@Test
-	public void addTest() {
+	public void multiplyTest() {
 		driver.findElement(AppiumBy.id("digit_5")).click();
 		driver.findElement(AppiumBy.accessibilityId("×")).click();
 		driver.findElement(AppiumBy.id("digit_7")).click();
