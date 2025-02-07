@@ -1,0 +1,15 @@
+-- Activity 10
+
+Select * from orders;
+
+Select * FROM orders
+WHERE salesman_id in (Select DISTINCT salesman_id FROM orders WHERE customer_id=3007);
+
+Select * FROM orders
+WHERE salesman_id IN (Select salesman_id FROM salesman WHERE salesman_city='New York');
+
+Select grade, COUNT(*) as "Number of Customers" FROM customers
+GROUP BY grade HAVING grade>(Select AVG(grade) FROM customers WHERE city='New York');
+
+Select * from orders
+where salesman_id in (Select salesman_id from salesman where commission in (Select Max(commission) from salesman));
