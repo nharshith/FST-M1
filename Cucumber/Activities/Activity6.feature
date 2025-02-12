@@ -1,13 +1,11 @@
-@activity5
-Feature: Login Test
+@activity6
+Feature: Data driven test with DataTable
 
-  Scenario Outline: Testing Login with Example
-    Given User is on Login page
-    When User enters "<Usernames>" and "<Passwords>"
-    Then Read the page title and confirmation message
-    And Close the Browser
-
-  Examples: 
-  	| Usernames | Passwords |
-  	| admin | password |
-  	| adminUser | password |
+@TasksDataTable
+Scenario: Testing the To-Do app
+  Given User completes the requirement
+  When User enters the following tasks
+    | task1 |
+    | task2 |
+    | task3 |
+  Then Verify results
