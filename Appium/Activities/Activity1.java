@@ -45,7 +45,7 @@ public class Activity1 {
 	public void multiplyTest() {
 		driver.findElement(AppiumBy.id("digit_5")).click();
 		driver.findElement(AppiumBy.accessibilityId("×")).click();
-		driver.findElement(AppiumBy.id("digit_7")).click();
+		driver.findElement(AppiumBy.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_7']")).click();
 		driver.findElement(AppiumBy.accessibilityId("equals")).click();
 		String result = driver.findElement(By.id("result")).getText();
 		assertEquals(result, "35");
